@@ -14,9 +14,11 @@ const xEmoji = document.getElementById("x-emoji");
 const playAgainBtn = document.getElementById("play-again-btn");
 
 let currentStreak = 0;
+let isAnswered = false; // lock flag
 
 function game() {
   imgCon.innerHTML = "";
+  isAnswered = false; // reset lock for new round
 
   const randBool = Math.random() > 0.5;
   const arr = [randBool, !randBool];
@@ -27,21 +29,19 @@ function game() {
     imgCon.appendChild(img);
 
     img.onclick = function () {
-      // Show feedback div with appropriate emoji
+      if (isAnswered) return; // 🚫 ignore extra clicks
+      isAnswered = true;
+
+      // Show feedback
       if (isReal) {
         checkEmoji.style.display = "inline";
         xEmoji.style.display = "none";
         feedbackDiv.className = "";
+        currentStreak++;
       } else {
         checkEmoji.style.display = "none";
         xEmoji.style.display = "inline";
         feedbackDiv.className = "";
-      }
-
-      // Update game state
-      if (isReal) {
-        currentStreak++;
-      } else {
         currentStreak = 0;
       }
 
@@ -50,14 +50,11 @@ function game() {
   }
 }
 
-// Set up play again button functionality
-playAgainBtn.onclick = function() {
+// Play again button
+playAgainBtn.onclick = function () {
   feedbackDiv.className = "feedback-hidden";
   game();
 };
 
-const playAgain = document.createElement("button");
-playAgain.textContent = "Play Again!";
-playAgain.onclick = game;
-
+// Start first game
 game();
