@@ -1,10 +1,6 @@
 body {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background: linear-gradient(135deg, #a1c0eb, #058fbd); /* Dark blue to light blue gradient */
   color: #4a4a4a;
   padding: 0;
@@ -29,9 +25,15 @@ h3, h4 {
   width: 40%;
   cursor: pointer;
   transition: transform 0.3s ease;
-  clip-path: inset(0 0 10px 0);
+  clip-path: inset(0 0 15px 0);
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  width: auto; /* Let the browser determine the width based on its natural size */
+  max-width: 150px; /* Set a maximum width to prevent it from getting too large */
+  height: auto; /* This maintains the aspect ratio of the image */
 }
 
 #images img:hover {
